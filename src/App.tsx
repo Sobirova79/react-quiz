@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react'
+import Navbar from './components/Navbar'
+import { Context } from './context/context'
+import Card from './components/Card'
 
-function App() {
+const App = () => {
+  const { TOTAL_QUESTIONS, score, data, loading, finish, num, checkAnswer, answerObj, prevQuestion,nextQuestion, restartGame } = useContext(Context)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Navbar total={TOTAL_QUESTIONS} score={score} />
+      {!loading && !finish && data.length > 0 && (
+        <>
+          <Card
+            queryNum={num + 1}
+            question={data[num].question}
+            answers={data[num].answers}
+            answerObj={answerObj ? answerObj[num] : undefined}
+            callback={checkAnswer}
+          />
+          <div className='quiz container'>
+            <div className="quiz__button">
+              {num > 0 ? (
+                <button className="quiz__prev" onClick={prevQuestion} disabled={false}>Previous</button>
+              ) : (
+                <button className="quiz__prev" onClick={prevQuestion} disabled={true}>Previous</button>
+              )
+              }
+              {answerObj.length >= num + 1 && num + 1 !== TOTAL_QUESTIONS ? (
+                <button className="quiz__next" onClick={nextQuestion} disabled={false}>Next</button>
+              ) : (
+                <button className="quiz__next" onClick={nextQuestion} disabled={true}>Next</button>
+              )
+              }
+            </div>
+            <button className="quiz__restart" onClick={restartGame}>
+              Restart
+            </button>
+          </div>
+        </>
+
+      )}
+      {loading && (
+        <div className='loading'><span className="loader"></span></div>
+      )}
+    </>
+  )
 }
 
-export default App;
+export default App

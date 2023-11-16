@@ -1,13 +1,153 @@
-body {
+*{
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background: #040411;
+}
+.container{
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+.navbar{
+  padding: 20px;
+  background: #1c1c9f;
+  color: #fff;
+  box-shadow: 0 5px 15px black;
+}
+.navbar .container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.navbar__title{
+  color: #fff;
+  font-size: 40px;
 }
+.navbar__score,.navbar__total{
+  font-size: 25px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.card{
+  margin-top: 30px;
+}
+.card__question{
+  font-size: 25px;
+  font-weight: 500;
+  color: #fff;
+}
+.card__answer{
+  width: 100%;
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: left;
+  padding: 20px;
+  margin-top: 30px;
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.card__answer.correct{
+  background: green;
+}
+.card__answer.uncorrect{
+  background: red;
+}
+.quiz{
+  margin-top: 40px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.quiz__button{
+  display: flex;
+  gap: 20px;
+}
+.quiz__prev, .quiz__next, .quiz__restart{
+  padding: 10px 20px;
+  font-size: 25px;
+  font-weight: 500;
+  background: rgb(21, 100, 23);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.quiz__prev:disabled, .quiz__next:disabled{
+  background: rgba(21, 100, 24, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+
+
+.loading{
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 8px solid;
+  border-color: blue blue transparent transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid;
+  border-color: transparent transparent #FF3D00 #FF3D00;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+.loader::before {
+  width: 32px;
+  height: 32px;
+  border-color: blue blue transparent transparent;
+  animation: rotation 1.5s linear infinite;
+}
+    
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+    
